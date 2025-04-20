@@ -219,7 +219,7 @@ def process_cases_in_range(start_row, end_row):
             writer.writerow(["id", "label"])
         writer.writerows(predictions)
 
-    print("✅ Done! Check the updated submission.csv")
+    print("✅ Done! Check the updated submissions2.csv")
 
 start_row = int(input("Enter the starting row number: "))
 end_row = int(input("Enter the ending row number: "))
