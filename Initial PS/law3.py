@@ -22,7 +22,6 @@ MODEL_NAME = "gemini-1.5-flash"  # gemini-2.0-flash also works, gemini-1.5-pro w
 # Court Agent class for all simulation participants
 class CourtAgent:
     """Base class for all legal participants in the courtroom simulation."""
-    
     def __init__(
         self,
         name: str,
@@ -243,7 +242,7 @@ class CourtSimulation:
         def_prompt = f"""
         Please deliver your opening statement in response to the prosecution.
         
-        The prosecution stated: "{pros_opening}"
+        The prosecution stated: "{pros_opening}" """
         
         Remember to establish your theory of the case and highlight key aspects
         that support your client's innocence or raise reasonable doubt.
