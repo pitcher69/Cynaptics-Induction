@@ -66,7 +66,7 @@ def process_cases_in_range(start_row, end_row):
 
     print("✅ Done! Check the updated submission.csv")
 
-# ==== STEP 5: USER INPUT FOR ROW RANGE ====
+# input for row ranges to operate on
 start_row = int(input("Enter the starting row number: "))
 end_row = int(input("Enter the ending row number: "))
 
