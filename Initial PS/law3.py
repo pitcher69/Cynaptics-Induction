@@ -242,7 +242,7 @@ class CourtSimulation:
         def_prompt = f"""
         Please deliver your opening statement in response to the prosecution.
         
-        The prosecution stated: "{pros_opening}" """
+        The prosecution stated: "{pros_opening}" 
         
         Remember to establish your theory of the case and highlight key aspects
         that support your client's innocence or raise reasonable doubt.
@@ -438,7 +438,7 @@ def main():
         test_case_index = 0
     
     # Load case data with the selected test case index
-    case_data = load_case_data(r"C:\Users\ESHWAR\OneDrive\Desktop\Programs\python\cynaptics\data.csv", test_case_index)
+    case_data = load_case_data("data.csv", test_case_index) # or path to data.csv file
     
     # Create and run the simulation
     simulation = CourtSimulation(case_data)
