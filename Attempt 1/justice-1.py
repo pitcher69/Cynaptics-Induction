@@ -8,7 +8,7 @@ genai.configure(api_key="gemini-api-key")
 model = genai.GenerativeModel(model_name="gemini-1.5-flash")
 
 # loading data
-df = pd.read_csv(r"C:\Users\ESHWAR\OneDrive\Desktop\Programs\python\cynaptics hackathon\cases.csv") 
+df = pd.read_csv("cases.csv") 
 df['id'] = df['id'].astype(str)  # convert 'id' to string 
 
 # judge simulation
@@ -58,7 +58,7 @@ def process_cases_in_range(start_row, end_row):
         time.sleep(1)  # avoid rate limits
     
     # update the submissions in a csv file
-    with open(r"C:\Users\ESHWAR\OneDrive\Desktop\Programs\python\cynaptics hackathon\submissions.csv", "a", newline="") as f:
+    with open("submissions.csv", "a", newline="") as f:
         writer = csv.writer(f)
         if f.tell() == 0: 
             writer.writerow(["id", "label"])
