@@ -3,17 +3,15 @@ import google.generativeai as genai
 import csv
 import time
 
-# ==== STEP 1: CONFIGURE GEMINI ==== 
-genai.configure(api_key="AIzaSyBRT9QXrdobIGUGtNl6lVm33JkX9ksCjmw")  # Replace with your actual key
+# model choice
+genai.configure(api_key="gemini-api-key") 
 model = genai.GenerativeModel(model_name="gemini-1.5-flash")
 
-# ==== STEP 2: LOAD CASE DATA ==== 
-df = pd.read_csv(r"C:\Users\ESHWAR\OneDrive\Desktop\Programs\python\cynaptics hackathon\cases.csv")  # Expects: id,text
+# load data
+df = pd.read_csv(r"C:\Users\ESHWAR\OneDrive\Desktop\Programs\python\cynaptics hackathon\cases.csv")  
+df['id'] = df['id'].astype(str)  # convert 'id' to string
 
-# Ensure 'id' is read as a string (not numeric) to avoid NaN issues
-df['id'] = df['id'].astype(str)  # Convert 'id' to string
-
-# ==== STEP 3: AGENT CLASSES ==== 
+# AGENTS
 
 class Judge:
     def evaluate(self, case_text):
@@ -189,22 +187,19 @@ def simulate_courtroom(case_text):
     elif total_granted < 2:  # Less than half say GRANTED
         final_verdict = 0  # Majority says DENIED
     else:
-        final_verdict = -1  # In case of a tie or invalid verdicts
+        final_verdict = -1  
 
     return final_verdict
 
-# ==== STEP 4: PROCESS A RANGE OF CASES BASED ON ROW NUMBER ==== 
+# evaluate cases in range
 def process_cases_in_range(start_row, end_row):
     predictions = []
     
-    # Filter the cases to only include the row range
-    filtered_cases = df.iloc[start_row:end_row+1]  # +1 because end_row is inclusive
+    filtered_cases = df.iloc[start_row:end_row+1] 
     
     print(f"Processing cases from row {start_row} to {end_row}:")
-    print(filtered_cases)  # Debug: Check the selected cases
-    
-    # If no cases match the filter, print a message
-    if filtered_cases.empty:
+    print(filtered_cases)  
+        if filtered_cases.empty:
         print(f"No cases found in the range {start_row} to {end_row}.")
         return
     
@@ -220,13 +215,12 @@ def process_cases_in_range(start_row, end_row):
     # Save the predictions to a CSV file
     with open(r"C:\Users\ESHWAR\OneDrive\Desktop\Programs\python\cynaptics hackathon\submissions2.csv", "a", newline="") as f:
         writer = csv.writer(f)
-        if f.tell() == 0:  # Write header only if the file is empty
+        if f.tell() == 0: 
             writer.writerow(["id", "label"])
         writer.writerows(predictions)
 
     print("✅ Done! Check the updated submission.csv")
 
-# ==== STEP 5: USER INPUT FOR ROW RANGE ==== 
 start_row = int(input("Enter the starting row number: "))
 end_row = int(input("Enter the ending row number: "))
 
